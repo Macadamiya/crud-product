@@ -3,7 +3,7 @@ package com.crud_product.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-//util, lidar se producto nao for encontrado, tratamento de erros
+//parecido com util, lidar se dado nao for encontrado, tratamento de erros
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends RuntimeException {
 

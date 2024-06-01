@@ -14,35 +14,23 @@ public class Product {
 
     private Double preco;
 
-    public Product() {
-    }
+    //construtor, precisa ser vazio
+    public Product() { }
 
-    public Product(Long id, String descricao, Double preco) {
-        this.id = id;
-        this.descricao = descricao;
-        this.preco = preco;
-    }
-
+    //access methods
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
+    public String getDescricao() {return descricao;}
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
     public Double getPreco() {
         return preco;
     }
-
     public void setPreco(Double preco) {
         this.preco = preco;
     }

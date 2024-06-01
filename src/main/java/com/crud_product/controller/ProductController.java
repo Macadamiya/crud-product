@@ -10,35 +10,31 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/api/products") //define link da api
 public class ProductController {
 
+    //injeção de dependencia
     @Autowired
     private ProductService productService;
 
+    //realiza as funcoes, criando uma açao ao servidor
     @PostMapping
     public Product createProduct(@RequestBody Product product) {
         return productService.saveProduct(product);
     }
 
     @GetMapping
-    public List<Product> getAllProducts() {
-        return productService.getAllProducts();
+    public List<Product> getProducts(@RequestParam(required = false) String descricao) {
+        if (descricao != null) {
+            return productService.getProductsByDescricao(descricao);
+        } else {
+            return productService.getAllProducts();
+        }
     }
 
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable Long id) {
         return productService.getProductById(id).get();
-    }
-
-    @GetMapping("/descricao")
-    public ResponseEntity<List<Product>> getProductsByDescricao(@RequestParam String descricao) {
-        try {
-            List<Product> products = productService.getProductsDescription(descricao);
-            return ResponseEntity.ok(products);
-        } catch (ResourceNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
     }
 
     @PutMapping("/{id}")
