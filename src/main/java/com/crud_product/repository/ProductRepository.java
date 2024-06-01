@@ -1,7 +1,9 @@
 package com.crud_product.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import com.crud_product.model.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
+    List<Product> findByDescricao(String descricao);
 }
