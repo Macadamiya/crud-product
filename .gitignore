@@ -35,3 +35,6 @@ build/
 .idea/
 
 .mvn/
+
+### Application Properties ###
+application.properties
