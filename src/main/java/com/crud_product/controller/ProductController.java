@@ -23,14 +23,16 @@ public class ProductController {
         return productService.saveProduct(product);
     }
 
+    // campo de pesquisa
     @GetMapping
-    public List<Product> getProducts(@RequestParam(required = false) String descricao) {
-        if (descricao != null) {
-            return productService.getProductsByDescricao(descricao);
+    public List<Product> getProducts(@RequestParam(required = false) String search) {
+        if (search != null) {
+            return productService.getProductsBySearch(search);
         } else {
             return productService.getAllProducts();
         }
     }
+
 
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable Long id) {
