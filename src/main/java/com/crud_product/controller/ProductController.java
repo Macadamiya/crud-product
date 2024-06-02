@@ -1,28 +1,35 @@
 package com.crud_product.controller;
 
-
+import com.crud_product.exception.ResourceNotFoundException;
 import com.crud_product.model.Product;
 import com.crud_product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/api/products") //define link da api
 public class ProductController {
 
+    //injeção de dependencia
     @Autowired
     private ProductService productService;
 
+    //realiza as funcoes, criando uma açao ao servidor
     @PostMapping
     public Product createProduct(@RequestBody Product product) {
         return productService.saveProduct(product);
     }
 
     @GetMapping
-    public List<Product> getAllProducts() {
-        return productService.getAllProducts();
+    public List<Product> getProducts(@RequestParam(required = false) String descricao) {
+        if (descricao != null) {
+            return productService.getProductsByDescricao(descricao);
+        } else {
+            return productService.getAllProducts();
+        }
     }
 
     @GetMapping("/{id}")
@@ -39,7 +46,4 @@ public class ProductController {
     public void deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
     }
-
-
-
 }
