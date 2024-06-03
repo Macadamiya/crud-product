@@ -4,7 +4,8 @@ import com.crud_product.exception.ResourceNotFoundException;
 import com.crud_product.model.Product;
 import com.crud_product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,19 +18,19 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    // cria funcao de salvar dado em api (save) - atualizado
+    // cria funcao de salvar dado em api (save)
     public Product saveProduct(Product product) {
         return productRepository.save(product);
     }
 
     //cria funcao get (findAll) - atualizado
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public Page<Product> getProducts(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
 
     // getall
-    public List<Product> getProductsBySearch(String search) {
-        return productRepository.findByModeloContainingOrFornecedorContainingOrDescricaoContainingOrCategoriaContainingOrMarcaContaining(search, search, search, search, search);
+    public Page<Product> getProductsBySearch(String search, Pageable pageable) {
+        return productRepository.findByModeloContainingOrFornecedorContainingOrDescricaoContainingOrCategoriaContainingOrMarcaContaining(search, search, search, search, search, pageable);
     }
 
     //verifica se existe aquele id, se tiver, ele retorna o dado, caso nao, ele retorna resolutionException -- atualizado
@@ -44,7 +45,7 @@ public class ProductService {
         product.setDescricao(productDetails.getDescricao());
         product.setPreco(productDetails.getPreco());
         product.setCategoria(productDetails.getCategoria());
-        product.setQtde_estoque(productDetails.getQtde_estoque());
+        product.setQtdeEstoque(productDetails.getQtdeEstoque());
         product.setFornecedor(productDetails.getFornecedor());
         product.setMarca(productDetails.getMarca());
         product.setModelo(productDetails.getModelo());
@@ -53,7 +54,7 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    //funcao deletar - atualizado
+    //funcao deletar
     public void deleteProduct(Long id) {
         Product product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found for this id :: " + id));
         productRepository.delete(product);

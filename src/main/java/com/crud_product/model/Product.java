@@ -1,6 +1,7 @@
 package com.crud_product.model;
 
 import jakarta.persistence.*;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDateTime;
 
@@ -10,10 +11,11 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+//    @NotNull(message = "A descrição do produto é obrigatória")
     private String descricao;
     private double preco;
     private String categoria;
-    private Integer qtde_estoque;
+    private Integer qtdeEstoque;
     private String fornecedor;
     private String marca;
     private String modelo;
@@ -64,8 +66,8 @@ public class Product {
     public String getCategoria() {return categoria;}
     public void setCategoria(String categoria) { this.categoria = categoria; }
 
-    public Integer getQtde_estoque() {return qtde_estoque;}
-    public void setQtde_estoque(Integer qtde_estoque) { this.qtde_estoque = qtde_estoque; }
+    public Integer getQtdeEstoque() {return qtdeEstoque;}
+    public void setQtdeEstoque(Integer qtdeEstoque) { this.qtdeEstoque = qtdeEstoque; }
 
     public String getFornecedor() {return fornecedor;}
     public void setFornecedor(String fornecedor) { this.fornecedor = fornecedor; }
