@@ -39,7 +39,7 @@ O documento de API foi feito utilizando o Postman e está disponível no link ab
     - descricao: String
     - preco: Double
     - categoria: String
-    - estoque: Integer
+    - qtdeEstoque: Integer
     - fornecedor: String
     - marca: String
     - modelo: String
@@ -48,8 +48,8 @@ O documento de API foi feito utilizando o Postman e está disponível no link ab
 
 #### Repositório
 
-- ProdutoRepository
-  ...(Esperando Mauro terminar)
+- findByModeloContainingOrFornecedorContainingOrDescricaoContainingOrCategoriaContainingOrMarcaContaining
+    - Parâmetros: String modelo, String fornecedor, String descricao, String categoria, String marca
 
 #### Serviço
 
@@ -59,7 +59,7 @@ O documento de API foi feito utilizando o Postman e está disponível no link ab
     - getProductById
     - updateProduct
     - deleteProduct
-    - ...(Esperando Mauro terminar)
+    - getProductsBySearch
 
 #### Controlador
 
@@ -69,6 +69,23 @@ O documento de API foi feito utilizando o Postman e está disponível no link ab
     - getProductById
     - updateProduct
     - deleteProduct
+
+[ProdutoController](src/main/java/com/crud_product/controller/ProductController.java)
+
+#### Paginação
+
+Usando o modulo de paginação do Spring Data JPA. Empacotando a função de paginação em uma função de util, para ser
+reutilizada em outros serviços.
+
+[Função de Paginação](src/main/java/com/crud_product/util/Pagination.java)
+
+#### Cors Configuration
+
+Configuração de CORS para permitir requisições de qualquer origem.
+
+[Configuração de CORS](src/main/java/com/crud_product/config/CorsConfig.java)
+
+
 
 
 
